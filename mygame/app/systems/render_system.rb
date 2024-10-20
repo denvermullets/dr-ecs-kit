@@ -15,6 +15,11 @@ class RenderSystem
 
   def render_sprites(args)
     sort_sprites.each do |entity|
+      if entity.component?(ModalComponent)
+        modal = entity.get_component(ModalComponent)
+        next unless modal.visible
+      end
+
       sprite = entity.get_component(SpriteComponent)
       args.outputs.sprites << { x: sprite.x, y: sprite.y, w: sprite.w, h: sprite.h, path: sprite.path }
     end

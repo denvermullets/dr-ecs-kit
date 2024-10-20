@@ -5,7 +5,7 @@ class InputSystem
   end
 
   def update(args)
-    @entities = args.state.entities
+    @entities = args.state.entity_manager.entities
     @inputs = args.inputs
     return unless @inputs.mouse.click
 
@@ -26,7 +26,8 @@ class InputSystem
       mouse_y >= sprite.y && mouse_y <= sprite.y + sprite.h
   end
 
-  def handle_click(_entity)
-    puts 'Entity was clicked, but no position component.'
+  def handle_click(entity)
+    clickable = entity.get_component(ClickableComponent)
+    clickable.on_click.call(entity)
   end
 end

@@ -5,10 +5,11 @@
 ###   SpriteComponent, SpriteComponent.new(path: 'sprites/square/blue.png', x: 100, y: 100, w: 50, h: 50))
 
 class Entity
-  attr_accessor :components
+  attr_accessor :components, :id
 
-  def initialize
+  def initialize(id: nil)
     @components = {}
+    @id = id
   end
 
   def add_component(type, component)
